@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>やる気スイッチ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+  <h1>やる気スイッチ</h1>
+  <label class="yaruki-switch" for="yaruki">
+    <span class="before">ON&nbsp;&nbsp;OFF</span>
+    <span class="inner">
+      <input type="checkbox" id="yaruki">
+    </span>
+    <span class="after">OFF&nbsp;&nbsp;ON</span>
+  </div>
+</div>
+
+<style>
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+html {
+  height: 100vh;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #fafafa;
+  font-family: sans-serif;
+}
+
+h1 {
+  margin: 0 0 1em;
+  font-size: 24px;
+  text-align: center;
+}
+
+:root {
+  --yaruki-width: 78px;
+  --yaruki-height: 48px;
+  --yaruki-padding: 4px;
+  --yaruki-round: calc(var(--yaruki-height) - 2 * var(--yaruki-padding));
+}
+
+.yaruki-switch {
+  font-size: 24px;
+  font-family: 'Roboto', sans-serif;
+  user-select: none;
+
+  & input[type=checkbox] {
+    display: none;
+  }
+
+  .inner {
+    position: relative;
+    display: inline-block;
+    width: var(--yaruki-width);
+    height: var(--yaruki-height);
+  }
+
+  .inner::before {
+    content: "";
+    display: inline-block;
+    width: var(--yaruki-width);
+    height: var(--yaruki-height);
+    border-radius: calc(var(--yaruki-height) * .5);
+    background-color: #a5c1d6;
+    transition: background-color 250ms ease-in-out;
+  }
+  .inner:has(.active)::before {
+    background-color: #62ba4a;
+  }
+
+  .inner::after {
+    position: absolute;
+    top: var(--yaruki-padding);
+    left: var(--yaruki-padding);
+    content: "";
+    display: inline-block;
+    width: var(--yaruki-round);
+    height: var(--yaruki-round);
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 9px 28px -6px #0008;
+    transition: left 500ms;
+  }
+  .inner:has(:checked)::after {
+    left: calc(var(--yaruki-width) - var(--yaruki-round) - var(--yaruki-padding));
+  }
+
+  .before, .after {
+    display: inline-block;
+    width: 52px;
+    line-height: 48px;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all 160ms ease-in-out;
+  }
+  .before {
+    color: #999;
+    text-indent: -41px;
+  }
+  &:has(:checked) .before {
+    color: #111;
+    text-indent: 10px;
+  }
+  .after {
+    color: #111;
+    text-indent: -46px;
+  }
+  &:has(:checked) .after {
+    color: #999;
+    text-indent: 4px;
+  }
+}
+</style>
+
+<script>
+{
+  const yaruki = document.querySelector("#yaruki");
+  yaruki.addEventListener('click', () => {
+    yaruki.classList.add('active');
+    setTimeout(() => {
+      yaruki.classList.remove('active');
+    }, 200);
+  });
+}
+</script>
+
+</body>
+</html>
