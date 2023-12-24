@@ -141,6 +141,7 @@ h1 {
   yaruki.addEventListener('click', () => {
     yaruki.classList.add('active');
     setTimeout(() => {
+      gtag('event', 'switch');
       yaruki.classList.remove('active');
     }, 200);
   });
